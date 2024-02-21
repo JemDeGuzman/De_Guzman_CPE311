@@ -1,0 +1,255 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyO3JrvG5sFlAjO+PhvvTXy/",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/JemDeGuzman/De_Guzman_CPE311/blob/main/De%20Guzman%20Hands-on%20Activity%204.1%3A%20The%20Tower%20of%20Hanoi%20Problem\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Hands-on Activity 4.1: The Tower of Hanoi Problem\n",
+        "\n",
+        "## Intended Learning Outcomes\n",
+        "\n",
+        "*   Analyze and solve computational problems using problem solving methodologies and decomposition\n",
+        "\n",
+        "## Objectives\n",
+        "\n",
+        "*   Introduce students to the Tower of Hanoi Problem;\n",
+        "*   Apply the fundamentals of logical and algorithmic thinking;\n",
+        "*   Solve the Tower of Hanoi Problem using Python.\n",
+        "\n",
+        "## Discussion\n",
+        "\n",
+        "The Tower of Hanoi is a mathematical puzzle invented by the French mathematician Edouard Lucas in 1883.\n",
+        "\n",
+        "There are three pegs, source(A), Auxiliary (B) and Destination(C). Peg A contains a set of disks stacked to resemble a tower, with the largest disk at the bottom and the smallest disk at the top. figure 1 Illustrate the initial configuration of the pegs for 3 disks. The objective is to transfer the entire tower of disks in peg A to peg C maintaining the same order of the disks.\n",
+        "\n",
+        "**Obeying the following rules:**\n",
+        "1.   Only one disk can be transfer at a time.\n",
+        "2.   Each move consists of taking the upper disk from one of the peg and placing it on the top of another peg i.e. a disk can only be moved if it is the uppermost disk of the peg.\n",
+        "3.   Never a larger disk is placed on a smaller disk during the transfer.\n",
+        "\n",
+        "The solution to the puzzle calls for an application of recursive functions and recurrence relations.\n",
+        "\n",
+        "![1](https://i.imgur.com/VclNGlH.png)\n",
+        "\n",
+        "Figure 1.1 Initial State of the Tower of Hanoi Problem\n",
+        "\n",
+        "A skeletal recursive procedure (Outline) for the solution of the problem for N number of disks is as follows:\n",
+        "\n",
+        "1.   Move the top N-1 disks from peg A to peg B (using C as an auxiliarypeg)\n",
+        "2.   Move the bottom disk from peg A to peg C\n",
+        "3.   Move N-1 disks from Peg B to Peg C (using Peg A as an auxiliary peg)\n",
+        "\n",
+        "The pictorial representation of the skeletal recursive procedure for N=4 disks is shown in Figure 2.\n",
+        "\n",
+        "![2](https://i.imgur.com/4dFC2K7.png)\n",
+        "\n",
+        "Figure 2 Tower of Hanoi Step-by-Step\n",
+        "\n",
+        "### Algorithm\n",
+        "\n",
+        "```\n",
+        "TOH( n,  Sour, Aux , Des)\n",
+        "If(n=1)\n",
+        "    Write (\"Move Disk “, n ,\" from \", Sour ,\" to \",Des)\n",
+        "Else\n",
+        "    TOH(n-1,Sour,Des,Aux);\n",
+        "    Write (\"Move Disk “, n ,\" from \", Sour ,\" to \",Des)\n",
+        "    TOH(n-1,Aux,Sour,Des);\n",
+        "END\n",
+        "```\n",
+        "\n",
+        "Let's take an example to better understand the algorithm (For n=3).\n",
+        "\n",
+        "![3](https://i.imgur.com/O2pmpbD.png)\n",
+        "\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "tuHVhaVUGwuD"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Procedure:\n",
+        "\n",
+        "1.   Implement the algorithm for the Tower of Hanoi Problem as shown above.\n",
+        "2.   Write your observations for your written algorithm/solution.\n",
+        "\n",
+        "## Supplementary Activity:\n",
+        "1.   Explain the programming paradigms/techniques (like recursion or dynamic programming) that you used to solve the given problem.\n",
+        "2.   Provide screenshots of the techniques and provide a quick analysis.\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "N-YabCZVJ5CL"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Solution:\n",
+        "\n",
+        "When trying to solve the Tower of Hanoi problem, there are some things that we must consider first:\n",
+        "\n",
+        "*   The \"disks\" have a specific value that can be compared in order to determine the proper order of their stacking.\n",
+        "*   The \"pegs\" can hold more than just one disk, but we can only move disks that are on the top of the peg.\n",
+        "\n",
+        "Through these, we can see that the pegs and disks are just a representation of the Stack data structure, specifically the pegs. Stacks follow the Last In First Out (LIFO) order for elements. This means that the last element we put inside the Stack will be the first one to be removed. This is similar to how we can only place or move a disk when it is on top of the peg.\n",
+        "\n",
+        "![4](https://i.imgur.com/bvlsrY0.png)\n",
+        "\n",
+        "For the disks, we can use integers as they can be comparable and moved from one stack to another, representing the moving of one disk to another. Since there is no specific Stack data structure in Python, we can use lists to represent them, utilizing append() and pop() functions to interact and move the elements around. The append() function adds an element to the rightmost part of the list while pop() function removes the rightmost element of the list. This is how we can represent the peg as stacks.\n",
+        "\n",
+        "![](https://i.imgur.com/1UCz1k9.png)\n",
+        "\n",
+        "The image above shows how stacks work similarly to how the pegs and disks work. Both follow the Last In First Out (LIFO) order for elements.\n",
+        "\n",
+        "The pseudocode below shows how we can represent the pegs through lists acting as stacks in Python. We will use append() for adding and pop() for removing the disks from the pegs.\n",
+        "\n",
+        "```\n",
+        "stack = []\n",
+        "\n",
+        "stack.append(3) #adds an element\n",
+        "# stack = [3]\n",
+        "stack.append(2) #adds an element\n",
+        "# stack = [3, 2]\n",
+        "stack.append(1) #adds an element\n",
+        "# stack = [3, 2, 1]\n",
+        "\n",
+        "stack.pop() #removes and returns the last element from the list, 1\n",
+        "# stack = [3, 2]\n",
+        "stack.pop() #removes and returns 2\n",
+        "# stack = [3]\n",
+        "stack.pop() #removes and returns 3\n",
+        "# stack = []\n",
+        "```\n",
+        "\n",
+        "Since we need 3 pegs: Source(A), Auxiliary(B), and Destination(C), we need to create 3 lists that will act as the stacks representing these pegs. As for the disks, we've mentioned before that we can use integers to represent them since they are comparable and can be used as elements for our stacks. To do this using only the number of disks *n*, we can use the range() function to generate our disks.\n",
+        "\n",
+        "```\n",
+        "#generate disks\n",
+        "n = 5\n",
+        "disks = [i for i in range(n, 0, -1)]\n",
+        "# disks = [5, 4, 3, 2, 1]\n",
+        "```\n",
+        "\n",
+        "Now that we have the necessary setup for the problem, we can start creating the algorithm that moves every disk from peg A to peg C. Since we are dealing with stacks, the most ideal way to do this is by using recursion. Our goal is to transfer all the disks from peg A to peg C in the same order that they were before. Since we are only given the value of the largest disk, and we know that the top-most disk will likely have a value of 1, we can use recursion to start at the bottom disk, work our way up the top disk, and move each disk to the auxiliary pin. Once we reach the bottom disk, we can move it to the destination peg and use recursion again to stack up the disks. Recursion allows us to remember the specific pegs that we used earlier by switching them up, treating pegs differently when certain conditions are met."
+      ],
+      "metadata": {
+        "id": "BErnbWkOKYdT"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Python Implementation:"
+      ],
+      "metadata": {
+        "id": "lOZ0_us8SJlq"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\"\"\"\n",
+        "This function takes an integer n and 3 stacks as input:\n",
+        "src, aux, dest. The function moves the elements from src\n",
+        "to dest in such it follows the rules of the Tower of Hanoi.\n",
+        "\"\"\"\n",
+        "\n",
+        "class Stack():\n",
+        "  def __init__(self, name, stack = []):\n",
+        "    self.stack = stack\n",
+        "    self.name = name\n",
+        "\n",
+        "  def __str__(self):\n",
+        "    return self.name\n",
+        "\n",
+        "\n",
+        "def tower_of_hanoi(n, src, aux, dest):\n",
+        "  if n == 1:\n",
+        "    print(f\"Move Disk {n} from {src} to {dest}.\")\n",
+        "    disk = src.stack.pop()\n",
+        "    dest.stack.append(disk)\n",
+        "  else:\n",
+        "    tower_of_hanoi(n-1, src, dest, aux)\n",
+        "    print(f\"Move Disk {n} from {src} to {dest}.\")\n",
+        "    disk = src.stack.pop()\n",
+        "    dest.stack.append(disk)\n",
+        "    tower_of_hanoi(n-1, aux, src, dest)\n",
+        "\n",
+        "n = int(input(\"Enter the number of disks: \"))\n",
+        "A = Stack(\"A\", [i for i in range(n, 0, -1)])\n",
+        "B = Stack(\"B\", [])\n",
+        "C = Stack(\"C\", [])\n",
+        "\n",
+        "print(A.stack)\n",
+        "print(B.stack)\n",
+        "print(C.stack)\n",
+        "\n",
+        "tower_of_hanoi(n, A, B, C)\n",
+        "\n",
+        "print(A.stack)\n",
+        "print(B.stack)\n",
+        "print(C.stack)\n",
+        "\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "YTXuKCyiSIoz",
+        "outputId": "80ab1258-ccca-40bb-c8ce-9b797af5dcc5"
+      },
+      "execution_count": 18,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Enter the number of disks: 3\n",
+            "[3, 2, 1]\n",
+            "[]\n",
+            "[]\n",
+            "Move Disk 1 from A to C.\n",
+            "Move Disk 2 from A to B.\n",
+            "Move Disk 1 from C to B.\n",
+            "Move Disk 3 from A to C.\n",
+            "Move Disk 1 from B to A.\n",
+            "Move Disk 2 from B to C.\n",
+            "Move Disk 1 from A to C.\n",
+            "[]\n",
+            "[]\n",
+            "[3, 2, 1]\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
